@@ -6,7 +6,7 @@ const axios = require('axios');
 const app = express();
 const port = 8887;
 
-const slackWebhookUrl = 'https://hooks.slack.com/services/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';
+const slackWebhookUrl = 'https://hooks.slack.com/services/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';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
