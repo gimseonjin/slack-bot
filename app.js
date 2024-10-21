@@ -55,7 +55,7 @@ app.post('/docker/up', (req, res) => {
 // Docker logs endpoint
 app.post('/docker/logs', (req, res) => {
     const serviceName = req.params.text;
-    const command = `${rootPath} docker logs | grep ${serviceName}`;
+    const command = `${rootPath} docker logs ${serviceName}`;
     executeSSHCommand(command, res);
 });
 
