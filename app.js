@@ -39,21 +39,21 @@ const executeSSHCommand = (command, res) => {
 };
 
 // Docker pull endpoint
-app.post('/docker/pull/:service_name', (req, res) => {
+app.post('/docker/pull', (req, res) => {
     const serviceName = req.params.text;
     const command = `${rootPath} ./script-domain.sh pull ${serviceName}`;
     executeSSHCommand(command, res);
 });
 
 // Docker up endpoint
-app.post('/docker/up/:service_name', (req, res) => {
+app.post('/docker/up', (req, res) => {
     const serviceName = req.params.text;
     const command = `${rootPath} ./script-domain.sh up ${serviceName}`;
     executeSSHCommand(command, res);
 });
 
 // Docker logs endpoint
-app.post('/docker/logs/:service_name', (req, res) => {
+app.post('/docker/logs', (req, res) => {
     const serviceName = req.params.text;
     const command = `${rootPath} docker logs | grep ${serviceName}`;
     executeSSHCommand(command, res);
