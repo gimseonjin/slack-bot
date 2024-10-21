@@ -17,6 +17,7 @@ const executeSSHCommand = (command, res) => {
 
     exec(sshCommand, { shell: '/bin/bash' }, (error, stdout, stderr) => {
         if (error) {
+            console.error(error.message)
             return res.send({
                 response_type: 'in_channel',
                 text: `Error: ${error.message}`
@@ -54,7 +55,7 @@ app.post('/docker/up/:service_name', (req, res) => {
 // Docker logs endpoint
 app.post('/docker/logs/:service_name', (req, res) => {
     const serviceName = req.params.text;
-    const command = `${rootPath} docker logs ${serviceName}`;
+    const command = `${rootPath} docker logs | grep ${serviceName}`;
     executeSSHCommand(command, res);
 });
 
