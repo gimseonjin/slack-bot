@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // POST 요청을 통해 셸 스크립트 실행
 app.post('/cmd', (req, res) => {
-    const command = req.body.text; // Slack Slash Command에서 전달된 명령어 또는 스크립트 이름
+    const rootPath = "cd /data/lucida-for-docker/polestar/bin && "
+    const command = rootPath + req.body.text; // Slack Slash Command에서 전달된 명령어 또는 스크립트 이름
 
     if (!command) {
       return res.status(400).send({
@@ -31,15 +32,7 @@ app.post('/cmd', (req, res) => {
           text: `Error: ${error.message}`
         });
       }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return res.status(500).send({
-          response_type: 'in_channel',
-          text: `stderr: ${stderr}`
-        });
-      }
-  
-      console.log(`${stdout}`);
+
       return res.send({
         response_type: 'in_channel',
         text: `${stdout}`
@@ -48,5 +41,5 @@ app.post('/cmd', (req, res) => {
   });
   
   app.listen(port, () => {
-    console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
+    console.log(`run on ${port}`);
   });
