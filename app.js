@@ -26,6 +26,7 @@ app.post('/cmd', (req, res) => {
     // 명령어 실행
     exec(sshCommand, { shell: '/bin/bash' }, (error, stdout, stderr) => {
       if (error) {
+        console.error(error.message)
         return res.status(500).send({
           response_type: 'in_channel',
           text: `Error: ${error.message}`
